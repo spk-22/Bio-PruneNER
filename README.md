@@ -1,4 +1,4 @@
-# AI & ML Lab Project: Adaptive Inference for Biomedical NER
+# Runtime Adaptive Token Pruning for LLM Based Biomedical Transformers
 
 This project demonstrates fine-tuning **BioBERT** for Named Entity Recognition (NER) in the biomedical domain (e.g., detecting diseases and chemicals). It further explores advanced **Adaptive Inference** techniques—including rule-based and learned (MLP) token pruning and recovery—to optimize model efficiency without compromising significantly on accuracy.
 
@@ -6,7 +6,7 @@ This project demonstrates fine-tuning **BioBERT** for Named Entity Recognition (
 
 - **Task**: Biomedical Named Entity Recognition (NER).
 - **Model**: BioBERT (`dmis-lab/biobert-base-cased-v1.1`).
-- **Datasets**: BC5CDR (Chemical/Disease) and NCBI Disease.
+- **Datasets**: BC5CDR (Chemical/Disease).
 - **Key Innovation**: Adaptive token pruning using attention entropy and an MLP-based controller, with a memory buffer for token recovery to maintain high F1 scores.
 
 ---
@@ -45,13 +45,61 @@ The `AI_&_ML_Lab_Project.ipynb` notebook is organized into the following logical
 *   **FLOPs Estimation**: Quantifies the computational savings (reduction in Floating Point Operations) achieved via token pruning.
 *   **Ablation Studies**: Analyzes the impact of different hyper-parameters (Lambda factor, Min Keep Ratio) and the effectiveness of the Recovery Mechanism.
 *   **Visualization**: Generates Matplotlib charts comparing Baseline, Rule-Based, and MLP Adaptive models in terms of F1 vs. Latency.
+---
 
-### 7. Interactive Demo
-*   **Gradio App**: Provides a user-friendly web interface. Users can input biomedical text, and the app visualizes detected entities using the adaptive inference pipeline.
+# Adaptive Token Pruning for Efficient NER
+
+This repository implements an **Adaptive Dynamic Token Pruning** framework for Named Entity Recognition (NER) using BERT. By identifying and removing redundant tokens during inference, the system achieves significant speedups in computational throughput (FLOPs) while maintaining high entity-extraction accuracy through a novel **Memory Buffer & Recovery** mechanism.
+
+## Key Features
+
+* **Multi-Strategy Controllers:** Includes Rule-based, MLP-based, and Entropy-driven pruning logic.
+* **Dynamic Recovery System:** Automatically detects low-confidence predictions and "recovers" tokens from a memory buffer to restore context.
+* **Efficiency Focused:** Optimized for reduction in quadratic  self-attention complexity.
+* **Comprehensive Evaluation:** Built-in tools for measuring latency, Error Analysis, Fairness Analysis, Ablation Studies, FLOPs.
 
 ---
 
-## Key Findings
-- **Efficiency**: The adaptive pruning methods achieve significant FLOPs reduction (e.g., ~30-50%) and latency improvements.
-- **Accuracy**: The recovery mechanism ensures that critical entity tokens are restored, keeping the F1 score close to the baseline model.
-- **Scalability**: The modularized code allows for testing different buffer sizes and trigger strategies for various deployment constraints.
+## System Architecture
+
+The project moves beyond static model compression by making real-time decisions per sequence:
+
+1. **Partial Inference:** The first  layers process the full sequence.
+2. **Importance Scoring:** Tokens are ranked based on attention weights and classification entropy.
+3. **Dynamic Pruning:** Non-essential tokens are masked out to accelerate the remaining layers.
+4. **Confidence Check:** If the pruned output is uncertain, the **Recovery Trigger** re-inserts tokens for a second, high-fidelity pass.
+
+---
+
+## Performance Summary (Example Results)
+
+| Model Configuration | F1 Score | Token Reduction | Theoretical Spe |
+| --- | --- | --- | --- |
+| **Baseline BERT** | 0.923 | 0.0% | 0.0% |
+| **Rule-Based Pruning** | 0.916 | 30% | 51% |
+| **MLP Adaptive + Recovery** | 0.923 | 2-4% | 4-9% |
+
+---
+
+## Installation & Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/spk-22/Bio-PruneNER.git
+
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run Streamlit Dashboard
+streamlit run streamlit_ner_demo.py
+```
+
+---
+
+## Ablation Studies
+
+The project includes scripts to test the sensitivity of:
+
+* **Lambda Factor:** Balancing aggressive pruning vs. accuracy.
+* **Min Keep Ratio:** Ensuring a safety floor for the number of tokens processed.
