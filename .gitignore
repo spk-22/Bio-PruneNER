@@ -1,0 +1,20 @@
+# Virtual environment
+venv/
+
+# Model weights
+*.pt
+*.bin
+
+# HuggingFace model folders
+final_models/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# OS files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,6 @@
+Example-1
+The patient, a 58-year-old male, presented with symptoms of idiopathic pulmonary fibrosis and secondary pulmonary hypertension. Genetic screening revealed a mutation in the SFTPC gene, which is known to affect surfactant protein C production in type II alveolar cells. To manage the progressive dyspnea, the clinical team initiated a regimen of Pirfenidone, a known antifibrotic agent, alongside low-dose Prednisolone. However, the patient developed acute kidney injury likely due to concurrent use of Ibuprofen for chronic osteoarthritis. 
+
+
+Example- 2
+Laboratory tests showed elevated levels of serum creatinine and cystatin C, suggesting a reduction in the glomerular filtration rate. Furthermore, the presence of proteinuria indicated damage to the renal podocytes. Consequently, non-steroidal anti-inflammatory drugs were immediately discontinued to prevent further nephrotoxicity. Treatment was then pivoted to Nintedanib, targeting tyrosine kinase receptors to slow the decline in forced vital capacity. The medical staff monitored the patient's liver enzymes, specifically alanine transaminase, to screen for potential hepatotoxicity.
