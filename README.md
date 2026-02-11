@@ -73,7 +73,7 @@ The project moves beyond static model compression by making real-time decisions 
 
 ## Performance Summary (Example Results)
 
-| Model Configuration | F1 Score | Token Reduction | Theoretical Spe |
+| Model Configuration | F1 Score | Token Reduction % | FLOPs Saved % |
 | --- | --- | --- | --- |
 | **Baseline BERT** | 0.923 | 0.0% | 0.0% |
 | **Rule-Based Pruning** | 0.916 | 30% | 51% |
